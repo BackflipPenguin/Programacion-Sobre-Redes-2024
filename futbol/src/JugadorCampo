@@ -1,0 +1,29 @@
+import { Jugador } from './Jugador';
+import { PosicionJugador } from './PosicionJugador';
+import { Equipo } from './Equipo';
+
+export class JugadorCampo extends Jugador {
+    private goles: number;
+    private tiros: number;
+    private asistencias: number;
+    constructor(nombre: string, apellido: string, nacimiento: Date, dni: number, club: Equipo, posicion: PosicionJugador, numeroCamiseta: number) {
+        super(nombre, apellido, nacimiento, dni, club, posicion, numeroCamiseta);
+        this.goles = 0;
+        this.tiros = 0;
+        this.asistencias = 0;
+    }
+    porcentajeGoles(): number {
+        return 100 / this.tiros * this.goles;
+    }
+    verificar(): boolean {
+        if (this.porcentajeGoles() <= 30 || this.asistencias <= 10) {
+            return false;
+        }
+        return true;
+    }
+    actualizarEstadisticas(p1: number, p2: number, p3: number): void {
+        this.goles = p1;
+        this.tiros = p2;
+        this.asistencias = p3;
+    }
+}
